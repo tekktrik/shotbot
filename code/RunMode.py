@@ -9,16 +9,16 @@ class RunMode:
     def __init__(self, startup_mode):
         self._mode = startup_mode
         self._sleeping = False
+        self._num_modes = len(self.ModeNames.keys())
 
     def setToMode(self, new_mode_num):
         self._mode = new_mode_num
 
     def advanceMode(self):
-        if self._mode == 0:
-            self._mode = 1
-        elif self._mode == 1:
-            self._mode = 2
-        elif self._mode == 2:
+        highest_mode = self._num_modes-1
+        if self._mode < highest_mode:
+            self._mode += 1
+        elif self._mode == highest_mode:
             self._mode = 0
         else:
             raise Exception("Invalid mode assignment")
