@@ -20,6 +20,10 @@ class LEDBackpack:
         self._flash_end = time.monotonic()
         self._display.print(input_text)
         
+    def stageText(self, input_text)
+        
+        self._current_text = input_text
+        
     def flashText(self, input_text, duration=2):
         
         if (input_text != self._flash_text):

@@ -28,14 +28,17 @@ def switchMode():
 def checkInputs():
     if not run_mode.isAsleep():
         rgb_button.displayColor(mode_colors[run_mode.getMode()])
-        credit_attachment.setCreditsInserted() if attach_manager.hasAttachment(coin_op_type)
+        if attach_manager.hasAttachment(coin_op_type):
+            credit_attachment.setLEDBrightness(1)
+            credit_attachment.setCreditsInserted()
+            credit_attachment.checkCoinInserted()
         if shot_stepper.isPastReleaseTimeout():
             run_mode.setToSleepMode()
             shot_stepper.release()
             if attach_manager.hasAttachment(coin_op_type):
                 credit_attachment.setSleep()
                 credit_attachment.setLEDBrightness(0.5)
-        if motor_button.isPushed():
+        elif motor_button.isPushed():
             moveGlassesCheck()
         elif prime_switch.isSwitched():
             runPriming()
@@ -45,6 +48,11 @@ def checkInputs():
                 time.sleep(0.75)
                 return
             else:
+                if attach_manager.hasAttachment(coin_op_type):
+                    if not credit_attachment.hasEnoughCredits(CreditAttachment.ModeCost[run_mode.getMode()]):
+                        credit_attachment.led_backpack.flashText("MORE", 1)
+                        time.sleep(1)
+                        return
                 rgb_button.displayColor(inprogress_color)
                 runModeCheck()
                 rgb_button.displayColor(mode_colors[run_mode.getMode()])
@@ -55,8 +63,6 @@ def checkInputs():
             shot_stepper.updateReleaseTimeout()
             rgb_button.displayColor(mode_colors[run_mode.getMode()])
             time.sleep(0.75)
-        
-    if 
 
 def runModeCheck():
     mode = run_mode.getMode()
@@ -87,7 +93,9 @@ def runPriming():
     time.sleep(0.25)
 
 def runSingleMode():
-    credit_attachment.setMoving() if attach_manager.hasAttachment(coin_op_type)
+    if attach_manager.hasAttachment(coin_op_type):
+        credit_attachment.spendCredit()
+        credit_attachment.setMoving()
     shot_stepper.moveToNextGlass()
     shot_stepper.moveToNextGlass()
     credit_attachment.setPouring() if attach_manager.hasAttachment(coin_op_type)
@@ -99,6 +107,7 @@ def runSingleMode():
     credit_attachment.flashDone() if attach_manager.hasAttachment(coin_op_type)
 
 def runFullMode():
+    credit_attachment.spendCredit(4) if attach_manager.hasAttachment(coin_op_type)
     for glass in range(shot_stepper.num_glasses):
         credit_attachment.setMoving() if attach_manager.hasAttachment(coin_op_type)
         shot_stepper.moveToNextGlass()
@@ -111,6 +120,7 @@ def runFullMode():
 
 
 def runPartyMode():
+    credit_attachment.spendCredit(1) if attach_manager.hasAttachment(coin_op_type)
     direction = 0
     for movement in range(5):
         credit_attachment.setMoving() if attach_manager.hasAttachment(coin_op_type)

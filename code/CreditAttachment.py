@@ -5,6 +5,12 @@ from AttachmentManager import AttachmentManager
 
 class CreditAttachment:
 
+    ModeCost = {
+        0: 1,
+        1: 4,
+        2: 1
+    }
+
     def __init__(self)):
         
         self.eeprom = EEPROMBreakout(AttachmentManager.Types["COIN_OP"])
@@ -28,6 +34,9 @@ class CreditAttachment:
             
     def spendCredit(self, num_credits=1):
         self._credits -= num_credits
+        
+    def hasEnoughCredits(self, num_credits):
+        return self._credits >= num_credits
         
     def setPouring(self):
         self.led_backpack.setText("POUR")
