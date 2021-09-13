@@ -1,20 +1,30 @@
 import board
+from enum import Enum
 
-class AttachementChecker:
+class AttachmentChecker:
 
-    def __init__(self, ):
-        
-        self._i2c = board.I2C()
-
-    def scan(self):
+    BASE_EEPROM_ADDRESS = 0x50
+    EEPROM_ADDRESS_OPTIONS = 8
     
-        while not self._i2c.try_lock():
-            pass
+    class AttachmentType(Enum):
+    
+        COIN_OP = 0x50
+        MULTIPLEXER = 0x51
         
+    @classmethod
+    def scan(cls):
+    
+        i2c = board.I2C()
+    
+        attachment_dict = {}
+    
+        while not i2c.try_lock():
+            pass
         try:
-            for i2c_address in self._i2c.scan():
-                
-                self._i2c.
-                
+            for i2c_address in i2c.scan():
+                if i2c_address in range(BASE_EEPROM_ADDRESS, BASE_EEPROM_ADDRESS+EEPROM_ADDRESS_OPTIONS):
+                    attachment_dict[i2c_address] = cls.AttachmentType(i2c_address)
         finally:
-            self._i2c.unlock()
+            i2c.unlock()
+            
+        return attachment_dict
