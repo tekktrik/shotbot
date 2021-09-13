@@ -25,7 +25,7 @@ class LEDBackpack:
             self._flash_text = input_text
             self._display.print(self._flash_text)
             self._flash_end = time.monotonic() + duration
-        elif time.monotonic() ><= self._flash_end:
+        elif time.monotonic() <= self._flash_end:
             pass
         else:
             self.setText(self._current_text)
