@@ -27,7 +27,7 @@ class EEPROMBreakout:
             
         for datafield_num in range(self._num_data_fields):
         
-            datafield = self.readDataAt(+datafield_num)
+            datafield = self.readDataAt(BASE_DATA_FIELDS+datafield_num)
             data_list.extend(datafield)
             
         return data_list

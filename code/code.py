@@ -5,6 +5,7 @@ from RGBButton import RGBButton
 from ShotStepper import ShotStepper
 from PumpMotor import PumpMotor
 from SimpleSwitch import SimpleSwitch
+from AttachmentChecker import AttachmentChecker
 from RunMode import RunMode
 
 enable = True
@@ -32,10 +33,8 @@ def checkInputs():
         if motor_button.isPushed():
             moveGlassesCheck()
         elif prime_switch.isSwitched():
-            #shot_stepper.unrelease()
             runPriming()
         elif rgb_button.isPushed():
-            #shot_stepper.unrelease()
             if rgb_button.isPushedFor(2):
                 switchMode()
                 time.sleep(0.75)
@@ -50,9 +49,9 @@ def checkInputs():
             run_mode.wakeUp()
             shot_stepper.updateReleaseTimeout()
             rgb_button.displayColor(mode_colors[run_mode.getMode()])
-            time.sleep(0.75)
-        else:
-            time.sleep(0.01)
+        time.sleep(0.01)
+        
+    if 
 
 def runModeCheck():
     mode = run_mode.getMode()
@@ -113,6 +112,7 @@ motor_button = SimpleButton(board.A2)
 prime_switch = SimpleSwitch(board.D6)
 shot_stepper = ShotStepper(2)
 pump_motor = PumpMotor(2)
+attach_checker = 
 run_mode = RunMode(0)
 red = rgb_button.Color.RED
 green = rgb_button.Color.GREEN
