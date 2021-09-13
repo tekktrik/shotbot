@@ -17,6 +17,7 @@ class LEDBackpack:
     def setText(self, input_text):
         
         self._current_text = input_text
+        self._flash_end = time.monotonic()
         self._display.print(input_text)
         
     def flashText(self, input_text, duration=2):
@@ -29,31 +30,7 @@ class LEDBackpack:
             pass
         else:
             self.setText(self._current_text)
-        
-    def setPouring(self):
-        self.setText("POUR")
-        
-    def setMoving(self):
-        self.setText("MOVE")
-        
-    def setDone(self):
-        self.setText("DONE")
-        
-    def setPush(self):
-        self.setText("PUSH")
-        
-    def flashSingleGlass(self):
-        self.flashText("SING")
-        
-    def flashAllGlasses(self):
-        self.flashText("ALL")
-        
-    def flashRandomGlass(self):
-        self.flashText("RAND")
-        
-    def setCreditsInserted(self, num_credits):
-        cent_text = '{:.2f}'(0.25*num_credits)
-        self.setText(cent_text)
+            self._flash_text = ""
         
     def marqueeShotBotName(self):
         self._display.marquee("SHOTBOT BY TEKKTRIK", 0.25, False)

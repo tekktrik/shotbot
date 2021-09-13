@@ -1,7 +1,10 @@
 import board
-from enum import Enum
 
-class AttachmentChecker:
+class AttachmentManager:
+
+    Types = {
+        "COIN_OP": 0x50
+    }
         
     def __init__(self):
     
@@ -16,8 +19,8 @@ class AttachmentChecker:
             pass
         try:
             for i2c_address in i2c.scan():
-                if i2c_address in [attachment.value for attachment in AttachmentType]:
-                    attachment_list.extend(AttachmentType(i2c_address))
+                if i2c_address in [address for address in Attachments.Types.values()]:
+                    attachment_list.extend(i2c_address)
         finally:
             i2c.unlock()
             
@@ -26,7 +29,10 @@ class AttachmentChecker:
         
     def hasAttachment(self, attachment_type):
         return attachment_type in self._attachments
-
-class AttachmentType(Enum):
     
-	COIN_OP = 0x50
+    @classmethod
+    def getNameForAddress(cls, input_address):
+    
+        for name, address in cls.Types.items():
+            if address == input_address:
+                return name

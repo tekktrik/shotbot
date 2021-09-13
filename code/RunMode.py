@@ -1,5 +1,11 @@
 class RunMode:
 
+    ModeNames = {
+        0: "SING",
+        1: "ALL",
+        2: "RAND"
+    }
+
     def __init__(self, startup_mode):
         self._mode = startup_mode
         self._sleeping = False

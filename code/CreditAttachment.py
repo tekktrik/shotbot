@@ -1,12 +1,13 @@
 from coin_acceptor import CoinAcceptor
 from led_backpack import LEDBackpack
 from i2c_eeprom import EEPROMBreakout
+from AttachmentManager import AttachmentManager
 
 class CreditAttachment:
 
-    def __init__(self, eeprom_i2c_address):
+    def __init__(self)):
         
-        self.eeprom = EEPROMBreakout(eeprom_i2c_address)
+        self.eeprom = EEPROMBreakout(AttachmentManager.Types["COIN_OP"])
         eeprom_data = self.eeprom.readAllData()
         
         led_i2c_address = eeprom_data[0]
@@ -27,3 +28,31 @@ class CreditAttachment:
             
     def spendCredit(self, num_credits=1):
         self._credits -= num_credits
+        
+    def setPouring(self):
+        self.led_backpack.setText("POUR")
+        
+    def setMoving(self):
+        self.led_backpack.setText("MOVE")
+        
+    def setFree(self):
+        self.led_backpack.setText("FREE")
+        
+    def setDone(self):
+        self.led_backpack.setText("DONE")
+        
+    def flashDone(self, duration=2):
+        self.led_backpack.flashText("DONE")
+        
+    def setPush(self):
+        self.led_backpack.setText("PUSH")
+        
+    def setCreditsInserted(self):
+        cent_text = '{:.2f}'(0.25*self._credits)
+        self.led_backpack.setText(cent_text)
+        
+    def setSleep(self)
+        self.led_backpack.setText("zzzz")
+        
+    def setLEDBrightness(self, setting):
+        self.led_backpack._display.brightness = setting
