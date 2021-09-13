@@ -140,9 +140,9 @@ blue = rgb_button.Color.BLUE
 mode_colors = [red, green, blue]
 inprogress_color = rgb_button.Color.PURPLE
 
-credit_attachment.led_backpack.marqueeShotBotName() if AttachmentManager.hasAttachment(coin_op_type)
+credit_attachment.led_backpack.marqueeShotBotName() if attach_manager.hasAttachment(coin_op_type)
 
 while True:
     checkInputs()
-    credit_attachment.led_backpack.checkFlashText()
+    credit_attachment.led_backpack.checkFlashText() if attach_manager.hasAttachment(coin_op_type)
     time.sleep(0.01)
