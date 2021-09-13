@@ -2,7 +2,7 @@ from coin_acceptor import CoinAcceptor
 from led_backpack import LEDBackpack
 from i2c_eeprom import EEPROMBreakout
 
-class CoinOpAttachment:
+class CreditAttachment:
 
     def __init__(self, eeprom_i2c_address):
         

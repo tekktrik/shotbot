@@ -5,7 +5,7 @@ from RGBButton import RGBButton
 from ShotStepper import ShotStepper
 from PumpMotor import PumpMotor
 from SimpleSwitch import SimpleSwitch
-from AttachmentChecker import AttachmentChecker
+from Attachments import AttachmentChecker, AttachmentType
 from RunMode import RunMode
 
 enable = True
@@ -112,7 +112,8 @@ motor_button = SimpleButton(board.A2)
 prime_switch = SimpleSwitch(board.D6)
 shot_stepper = ShotStepper(2)
 pump_motor = PumpMotor(2)
-attach_checker = 
+attach_manager = AttachmentChecker()
+if attach_manager.hasAttachment(
 run_mode = RunMode(0)
 red = rgb_button.Color.RED
 green = rgb_button.Color.GREEN
