@@ -1,7 +1,7 @@
-from coin_acceptor import CoinAcceptor
-from led_backpack import LEDBackpack
-from i2c_eeprom import EEPROMBreakout
-from AttachmentManager import AttachmentManager
+from attachments.coin_acceptor import CoinAcceptor
+from attachments.led_backpack import LEDBackpack
+from attachments.i2c_eeprom import EEPROMBreakout
+from attachments.attachment_manager import AttachmentManager
 
 class CreditAttachment:
 

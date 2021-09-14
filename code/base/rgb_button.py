@@ -1,7 +1,7 @@
 from pulseio import PWMOut
-from digitalio import DigitalInOut, Direction, Pull
-import time
-from SimpleButton import SimpleButton
+#from digitalio import DigitalInOut, Direction, Pull
+#import time
+from base.simple_button import SimpleButton
 
 class RGBButton(SimpleButton):
 

@@ -1,12 +1,12 @@
 import time
 import board
-from SimpleButton import SimpleButton
-from RGBButton import RGBButton
-from ShotStepper import ShotStepper
-from PumpMotor import PumpMotor
-from SimpleSwitch import SimpleSwitch
-from AttachmentManager import AttachmentManager
-from RunMode import RunMode
+from base.simple_button import SimpleButton
+from base.rgb_Button import RGBButton
+from base.shot_stepper import ShotStepper
+from base.pump_motor import PumpMotor
+from base.simple_switch import SimpleSwitch
+from base.run_mode import RunMode
+from attachments.attachment_manager import AttachmentManager
 
 enable = True
 
