@@ -3,7 +3,8 @@ import board
 class AttachmentManager:
 
     Types = {
-        "COIN_OP": 0x50
+        "COIN_OP": 0x50,
+        "TWITCH_BOT": 0x51
     }
         
     def __init__(self):

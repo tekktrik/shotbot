@@ -15,12 +15,13 @@ shot_stepper = ShotStepper(2)
 pump_motor = PumpMotor(2)
 attach_manager = AttachmentManager()
 coin_op_type = AttachmentManager.Types["COIN_OP"]
-twitch_bot_type = AttachmentManager.Types["TWITCH_BOT_OP"]
+twitch_bot_type = AttachmentManager.Types["TWITCH_BOT"]
 if attach_manager.hasAttachment(coin_op_type):
     from credit_attachment import CreditAttachment
     credit_attachment = CreditAttachment()
 elif attach_manager.hasAttachment(twitch_bot_type):
     # initialize twitch-bot type
+    pass
 run_mode = RunMode(0)
 red = rgb_button.Color.RED
 green = rgb_button.Color.GREEN
