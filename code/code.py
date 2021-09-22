@@ -32,3 +32,8 @@ if attach_manager.hasAttachment(AttachmentManager.Types["COIN_OP"]):
 elif attach_manager.hasAttachment(AttachmentManager.Types["TWITCH_BOT"]):
     # initialize twitch-bot type
     pass
+else:
+    from base_sequence import ShotBotSequence
+
+seq = ShotBotSequence(device_map)
+seq.run()
