@@ -59,13 +59,16 @@ class ShotBotSequence:
             self.runPartyMode()
 
     def moveGlassesCheck(self):
-        if self._devices["motor_button"].isPushedFor(2):
-            while self._devices["motor_button"].isPushed():
-                self._devices["shot_stepper"].release()
+        motor_button = self._devices["motor_button"]
+        shot_stepper = self._devices["shot_stepper"]
+    
+        if motor_button.isPushedFor(2):
+            while motor_button.isPushed():
+                shot_stepper.release()
                 time.sleep(0.01)
-            self._devices["shot_stepper"].unrelease()
+            shot_stepper.unrelease()
         else:
-            self._devices["shot_stepper"].moveToNextGlass()
+            shot_stepper.moveToNextGlass()
 
     def runPriming(self):
         pump_motor = self._devices["pump_motor"]
@@ -87,8 +90,10 @@ class ShotBotSequence:
         shot_stepper.moveToNextGlass()
 
     def runFullMode(self):
-        for glass in range(self._devices["shot_stepper"].num_glasses):
-            self._devices["shot_stepper"].moveToNextGlass()
+        shot_stepper = self._devices["shot_stepper"]
+        
+        for glass in range(shot_stepper.num_glasses):
+            shot_stepper.moveToNextGlass()
             time.sleep(0.25)
             self._devices["pump_motor"].pumpVolume(44)
             time.sleep(0.25)
