@@ -7,26 +7,28 @@ from base.pump_motor import PumpMotor
 from base.simple_switch import SimpleSwitch
 from base.run_mode import RunMode
 from attachments.attachment_manager import AttachmentManager
+from base.device_map import DeviceMap
 
-rgb_button = RGBButton(board.A1, board.D9, board.D10, board.D11)
-motor_button = SimpleButton(board.A2)
-prime_switch = SimpleSwitch(board.D6)
-shot_stepper = ShotStepper(2)
-pump_motor = PumpMotor(2)
+device_map = DeviceMap()
+
+device_map.addDevice("rgb_button", RGBButton(board.A1, board.D9, board.D10, board.D11))
+device_map.addDevice("motor_button", SimpleButton(board.A2))
+device_map.addDevice("prime_switch", SimpleSwitch(board.D6))
+device_map.addDevice("shot_stepper", ShotStepper(2))
+device_map.addDevice("pump_motor", PumpMotor(2))
+
+device_map.addAttachmentManager(attach_manager)
+
+device_map.addRunMode(RunMode(0))
+device_map.addModeColors([rgb_button.Color.RED, rgb_button.Color.GREEN, rgb_button.Color.BLUE])
+device_map.addInProgressColor(rgb_button.Color.PURPLE)
+
+device_map.getDevice("credit_attachment").led_backpack.marqueeShotBotName() if attach_manager.hasAttachment(coin_op_type)
+
 attach_manager = AttachmentManager()
-coin_op_type = AttachmentManager.Types["COIN_OP"]
-twitch_bot_type = AttachmentManager.Types["TWITCH_BOT"]
-if attach_manager.hasAttachment(coin_op_type):
+if attach_manager.hasAttachment(AttachmentManager.Types["COIN_OP"]):
     from credit_attachment import CreditAttachment
-    credit_attachment = CreditAttachment()
-elif attach_manager.hasAttachment(twitch_bot_type):
+    device_map.addDevice("credit_attachment", CreditAttachment())
+elif attach_manager.hasAttachment(AttachmentManager.Types["TWITCH_BOT"]):
     # initialize twitch-bot type
     pass
-run_mode = RunMode(0)
-red = rgb_button.Color.RED
-green = rgb_button.Color.GREEN
-blue = rgb_button.Color.BLUE
-mode_colors = [red, green, blue]
-inprogress_color = rgb_button.Color.PURPLE
-
-credit_attachment.led_backpack.marqueeShotBotName() if attach_manager.hasAttachment(coin_op_type)
