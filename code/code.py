@@ -23,8 +23,6 @@ device_map.addRunMode(RunMode(0))
 device_map.addModeColors([rgb_button.Color.RED, rgb_button.Color.GREEN, rgb_button.Color.BLUE])
 device_map.addInProgressColor(rgb_button.Color.PURPLE)
 
-device_map.getDevice("credit_attachment").led_backpack.marqueeShotBotName() if attach_manager.hasAttachment(coin_op_type)
-
 attach_manager = AttachmentManager()
 if attach_manager.hasAttachment(AttachmentManager.Types["COIN_OP"]):
     from credit_attachment import CreditAttachment
@@ -34,6 +32,8 @@ elif attach_manager.hasAttachment(AttachmentManager.Types["TWITCH_BOT"]):
     pass
 else:
     from base_sequence import ShotBotSequence
+    
+device_map.getDevice("credit_attachment").led_backpack.marqueeShotBotName() if attach_manager.hasAttachment(coin_op_type)
 
 seq = ShotBotSequence(device_map)
 seq.run()
