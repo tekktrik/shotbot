@@ -26,14 +26,15 @@ device_map.addInProgressColor(rgb_button.Color.PURPLE)
 attach_manager = AttachmentManager()
 if attach_manager.hasAttachment(AttachmentManager.Types["COIN_OP"]):
     from credit_attachment import CreditAttachment
+    from credit_sequence import ShotBot
     device_map.addDevice("credit_attachment", CreditAttachment())
 elif attach_manager.hasAttachment(AttachmentManager.Types["TWITCH_BOT"]):
     # initialize twitch-bot type
     pass
 else:
-    from base_sequence import ShotBotSequence
+    from base_sequence import ShotBot
     
 device_map.getDevice("credit_attachment").led_backpack.marqueeShotBotName() if attach_manager.hasAttachment(coin_op_type)
 
-seq = ShotBotSequence(device_map)
-seq.run()
+sb = ShotBot(device_map)
+sb.run()

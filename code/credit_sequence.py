@@ -1,6 +1,6 @@
 import time
 
-class ShotBotSequence:
+class ShotBot:
     
     def __init__(self, device_map):
         self._device_map = device_map
