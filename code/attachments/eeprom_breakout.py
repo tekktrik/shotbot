@@ -1,3 +1,5 @@
+import board
+
 class EEPROMBreakout:
 
     BASE_ADDRESS = 0x50
@@ -14,7 +16,7 @@ class EEPROMBreakout:
         
         returndata = []
         
-        self._i2c.writeto_then_readfrom(self._address, bytearray([self._address]), bytearray([returndata]))
+        self._i2c.writeto_then_readfrom(self._address, bytearray([memory_address]), bytearray([returndata]))
         
         return returndata[0]
     
