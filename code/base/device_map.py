@@ -10,6 +10,9 @@ class DeviceMap:
         
     def getDevice(self, device_name):
         return self._device_dict[device_name]
+    
+    def getDevices(self):
+        return self._device_dict
         
     def removeDevice(self, device_name):
         del self._device_dict[device_name]
