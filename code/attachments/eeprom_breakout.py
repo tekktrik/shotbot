@@ -1,3 +1,5 @@
+import board
+
 class EEPROMBreakout:
 
     BASE_ADDRESS = 0x50
@@ -14,7 +16,7 @@ class EEPROMBreakout:
         
         returndata = []
         
-        self._i2c.writeto_then_readfrom(self._address, bytearray([self._address]), bytearray([returndata]))
+        self._i2c.writeto_then_readfrom(self._address, bytearray([memory_address]), bytearray([returndata]))
         
         return returndata[0]
     
@@ -26,7 +28,6 @@ class EEPROMBreakout:
             self._num_data_fields = self.getNumOfDataFields()
             
         for datafield_num in range(self._num_data_fields):
-        
             datafield = self.readDataAt(BASE_DATA_FIELDS+datafield_num)
             data_list.extend(datafield)
             
@@ -37,20 +38,16 @@ class EEPROMBreakout:
         self._i2c.writeto(self._address, bytearray([memory_address, data]))
     
     def writeAllDataFields(self, data_list):
-    
         for datafield_num in range(len(data_list)):
             self.writeDataAt(BASE_DATA_FIELDS+datafield_num, data_list[0])
             
     def getAttachmentNum(self):
-    
         return (self._address - self.BASE_ADDRESS) + 1
             
     def getNumOfDataFields(self):
-        
         return self.readDataAt(self.FIELD_NUM_DATAFIELDS)
         
     def setNumOfDataFields(self, num_datafields):
-    
         self.writeDataAt(self.FIELD_NUM_DATAFIELDS, num_datafields)
             
     @classmethod
