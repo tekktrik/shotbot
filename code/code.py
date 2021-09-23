@@ -20,7 +20,7 @@ if attach_manager.hasAttachment(coin_op_type):
     from credit_attachment import CreditAttachment
     credit_attachment = CreditAttachment()
 elif attach_manager.hasAttachment(twitch_bot_type):
-    # initialize twitch-bot type
+    # initialize twitch-bot type and packages
     pass
 run_mode = RunMode(0)
 red = rgb_button.Color.RED
